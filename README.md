@@ -1,16 +1,18 @@
-# Multi-Class Chest X-Ray Classification for Respiratory Diseases
+# Custom CNN for Multi-Class Classification of Respiratory Diseases
+
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-blue?style=for-the-badge&logo=github)](https://github.com/ADVAYA1/X-Rays-Image-Analysis)
+
 
 ## Project Overview 📖
 
-This project presents a deep learning solution for the automated diagnosis of respiratory diseases from chest X-ray images. A Convolutional Neural Network (CNN) is built and trained to perform multi-class classification, distinguishing between four key categories: **COVID-19**, **Normal**, **Pneumonia**, and **Tuberculosis**. The goal is to create a fast and accurate tool to assist medical professionals in diagnosing these conditions.
+This project presents a robust deep learning solution for the automated diagnosis of respiratory diseases from chest X-ray images. A **custom Convolutional Neural Network (CNN)** was designed from the ground up to perform multi-class classification, accurately distinguishing between four categories: **COVID-19**, **Normal**, **Pneumonia**, and **Tuberculosis**. This tool is intended to assist medical professionals by providing rapid, high-accuracy diagnostics.
 
 ---
 
-## Dataset 📂
+## Dataset & Preprocessing 📂
 
-The model is trained on a dataset of chest X-ray images organized into four folders, each corresponding to one of the classes. All images are resized to a uniform `224x224` pixels before being fed into the network.
+The model was trained on a comprehensive dataset of chest X-ray images, resized to `224x224` pixels. To enhance the model's ability to generalize and prevent overfitting, a key part of our methodology was **Image Augmentation**. The following transformations were applied to the training set:
 
-**Data Augmentation** is used to artificially expand the dataset and prevent overfitting. The following transformations are applied to the training images:
 * Rotation
 * Width and Height Shifts
 * Shear transformations
@@ -19,31 +21,29 @@ The model is trained on a dataset of chest X-ray images organized into four fold
 
 ---
 
-## Model Architecture 🧠
+## Custom CNN Architecture 🧠
 
-A Convolutional Neural Network (CNN) was designed and implemented using TensorFlow and Keras. The architecture consists of sequential convolutional and pooling layers, followed by dense layers for classification.
+A **custom CNN architecture** was developed using TensorFlow and Keras, tailored specifically for this classification task. The architecture was built sequentially, allowing for fine-grained control over the feature extraction and classification process.
 
-* **Convolutional Layers:** Use `Conv2D` with the `ReLU` activation function to extract features like edges and textures from the images.
-* **Max Pooling Layers:** `MaxPooling2D` layers are used to down-sample the feature maps, reducing computational complexity and making the model more robust to variations in feature positions.
-* **Dropout Layer:** A `Dropout` layer is included to prevent overfitting by randomly setting a fraction of input units to 0 during training.
-* **Flatten Layer:** This layer converts the 2D feature maps into a 1D vector.
-* **Dense Layers:** Fully connected layers that perform the final classification. The output layer uses a `softmax` activation function to produce a probability distribution over the four classes.
+* **Convolutional & Pooling Layers (`Conv2D`, `MaxPooling2D`):** Multiple layers were stacked to progressively extract hierarchical features from the X-ray images. `ReLU` activation was used to introduce non-linearity.
+* **Dropout Layer:** A `Dropout` layer was strategically placed to mitigate overfitting by randomly deactivating neurons during training.
+* **Flatten & Dense Layers:** The extracted feature maps were flattened into a 1D vector and passed through fully connected (`Dense`) layers. The final output layer utilizes a `softmax` activation function to generate class probabilities.
 
 ---
 
-## Results and Evaluation 📊
+## Model Training & Evaluation 📊
 
-The model's performance was rigorously evaluated. An experiment was conducted to find the best optimizer, and the final model's performance was analyzed using a confusion matrix and a classification report.
+The model's training process and performance were rigorously evaluated to ensure its effectiveness and reliability.
 
-### Optimizer Comparison
+### Optimizer Performance Analysis
 
-Different optimizers were compared based on their validation accuracy. The **Adam** optimizer demonstrated the best performance, achieving the highest accuracy among the tested options.
+An essential step was to select the best optimization algorithm. A comparative analysis was conducted, and the **Adam optimizer** was chosen, as it achieved the highest validation accuracy and demonstrated superior convergence.
 
 ![Optimizer Accuracy Comparison](Optimisers%20Accuracy.png)
 
-### Final Model Performance
+### Final Model Results
 
-The final model, trained with the Adam optimizer, shows excellent performance on the test set. The confusion matrix and classification report provide a detailed breakdown of its predictive accuracy for each class. The model demonstrates high precision and recall, especially for identifying 'NORMAL' and 'TUBERCULOSIS' cases.
+The final custom CNN, trained using the Adam optimizer, achieved high accuracy on the unseen test data. The performance is detailed in the **Confusion Matrix** and **Classification Report**, which confirm the model's strong predictive power, especially in identifying 'NORMAL' and 'TUBERCULOSIS' cases with high precision and recall.
 
 ![Confusion Matrix and Classification Report](Result.png)
 
@@ -53,37 +53,19 @@ The final model, trained with the Adam optimizer, shows excellent performance on
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/your-username/chest-xray-classification.git](https://github.com/your-username/chest-xray-classification.git)
-    cd chest-xray-classification
+    git clone [https://github.com/ADVAYA1/X-Rays-Image-Analysis.git](https://github.com/ADVAYA1/X-Rays-Image-Analysis.git)
+    cd X-Rays-Image-Analysis
     ```
 2.  **Prepare the Dataset:**
     Organize your dataset into a root folder with four sub-folders named `COVID19`, `NORMAL`, `PNEUMONIA`, and `TUBERCULOSIS`.
-
-    ```
-    dataset/
-    ├── COVID19/
-    │   ├── image1.png
-    │   └── ...
-    ├── NORMAL/
-    │   ├── image1.png
-    │   └── ...
-    ├── PNEUMONIA/
-    │   ├── image1.png
-    │   └── ...
-    └── TUBERCULOSIS/
-        ├── image1.png
-        └── ...
-    ```
 3.  **Run the Jupyter Notebook:**
-    Open and run the `MLFinal.ipynb` notebook in an environment like Google Colab or Jupyter Lab. Make sure to update the file paths to point to your dataset's location.
+    Open and execute the `MLFinal.ipynb` notebook. Ensure you update the directory paths to match the location of your dataset.
 
 ---
 
 ## Dependencies 📦
 
-* TensorFlow
-* Keras
+* TensorFlow & Keras
 * Scikit-learn
-* Matplotlib
-* Seaborn
+* Matplotlib & Seaborn
 * NumPy
